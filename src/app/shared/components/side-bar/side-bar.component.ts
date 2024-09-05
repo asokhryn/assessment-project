@@ -10,7 +10,7 @@ import {NgClass} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatListItem, MatNavList} from "@angular/material/list";
-import {RouterLink} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-side-bar',
@@ -26,14 +26,15 @@ import {RouterLink} from "@angular/router";
     MatIcon,
     MatListItem,
     MatNavList,
-    RouterLink
+    RouterLink,
+    RouterOutlet
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent {
   itemList: any = [
-    {text: 'Home', icon: 'home', link: 'home'},
+    {text: 'Home', icon: 'home', link: ''},
     {text: 'Users', icon: 'person', link: 'users'},
     {text: 'Settings', icon: 'settings', link: 'settings'},
   ]
