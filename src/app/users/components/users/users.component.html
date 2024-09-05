@@ -1,0 +1,17 @@
+@if(loading$ | async) {
+ <div>
+   Loading...
+ </div>
+}
+@else {
+  <div class="list-container">
+      <mat-list role="list">
+        @for(user of users$ | async; track user) {
+          <mat-list-item role="listitem">
+            <strong>{{ user.name }}</strong> {{ user.email }}
+          </mat-list-item>
+        }
+      </mat-list>
+  </div>
+}
+
