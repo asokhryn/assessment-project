@@ -7,9 +7,16 @@
   <div class="list-container">
       <mat-list role="list">
         @for(user of users$ | async; track user) {
-          <mat-list-item role="listitem">
-            <strong>{{ user.name }}</strong> {{ user.email }}
+          <mat-list-item role="listitem" class="user-item">
+            <div class="user-item">
+              <div class="user-info">
+                <strong>{{ user.name }}</strong> {{ user.email }}
+              </div>
+              <button class="delete-button" mat-icon-button color="warn" (click)="openDialog('0ms', '0ms', user)"><mat-icon>delete</mat-icon></button>
+            </div>
+
           </mat-list-item>
+          <mat-divider></mat-divider>
         }
       </mat-list>
   </div>

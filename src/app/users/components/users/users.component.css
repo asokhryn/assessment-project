@@ -3,6 +3,21 @@
   padding: 8px;
 }
 
-mat-card {
-  padding: 16px;
+mat-list-item {
+  text-align: left;
 }
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.delete-button {
+  margin-left: auto;
+}
+

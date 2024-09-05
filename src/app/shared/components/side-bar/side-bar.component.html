@@ -1,9 +1,9 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer opened="true" mode="side" position="start">
-    <mat-nav-list>
+    <mat-nav-list >
       @for (item of itemList; track item) {
-        <mat-list-item>
-          <button [routerLink]="item.link" mat-button><mat-icon>{{item.icon}}</mat-icon> {{item.text}}</button>
+        <mat-list-item [routerLink]="item.link">
+          <div class="item"><mat-icon>{{item.icon}}</mat-icon> {{item.text}}</div>
         </mat-list-item>
       }
     </mat-nav-list>
