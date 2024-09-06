@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {SelectComponent} from "../../../shared/components/select/select.component";
 import {SettingContactFormComponent} from "../setting-contact-form/setting-contact-form.component";
+import {SnackBarComponent} from "../../../shared/components/snack-bar/snack-bar.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-settings',
@@ -26,7 +28,19 @@ export class SettingsComponent {
     { value: 'Japanese', viewValue: 'Japanese' }
   ];
 
+  private _snackBar = inject(MatSnackBar);
+  durationInSeconds = 5;
+
+  openSnackBar(msg: string) {
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: this.durationInSeconds * 1000,
+      data: {
+        message: msg,
+      }
+    });
+  }
+
   onLanguageSelected($event: string) {
-    console.log($event)
+    this.openSnackBar(`Your language "${$event}" is selected.`);
   }
 }

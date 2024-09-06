@@ -12,3 +12,7 @@
 td {
   padding-right: 8px;
 }
+
+.mat-mdc-raised-button {
+  color: black !important;
+}
