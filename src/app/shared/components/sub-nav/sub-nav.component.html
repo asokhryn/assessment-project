@@ -1,0 +1,7 @@
+<mat-toolbar>
+  <span class="spacer"></span>
+
+  @for (linkItem of linkList; track linkItem){
+    <a mat-button [routerLink]="linkItem.link">{{linkItem.labelLink}}</a>
+  }
+</mat-toolbar>

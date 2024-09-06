@@ -34,3 +34,8 @@ export interface ICompany {
   bs: string;
 }
 
+export interface ILinkList {
+  link: string
+  labelLink: string
+}
+

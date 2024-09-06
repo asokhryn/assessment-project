@@ -11,6 +11,8 @@ import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmModalComponent} from "../../../shared/components/modals/confirm-modal/confirm-modal.component";
 import {InfoModalComponent} from "../../../shared/components/modals/info-modal/info-modal.component";
+import {SubNavComponent} from "../../../shared/components/sub-nav/sub-nav.component";
+import {RouterOutlet} from "@angular/router";
 
 
 @Component({
@@ -26,7 +28,9 @@ import {InfoModalComponent} from "../../../shared/components/modals/info-modal/i
     MatDivider,
     MatIcon,
     MatIconButton,
-    MatButton
+    MatButton,
+    SubNavComponent,
+    RouterOutlet
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'

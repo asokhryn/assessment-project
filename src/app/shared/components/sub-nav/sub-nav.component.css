@@ -1,0 +1,16 @@
+mat-toolbar {
+  background: rgba(230,230,226,0.7)
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
