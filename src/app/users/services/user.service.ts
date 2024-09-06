@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IUser } from '../types/interfaces';
 import { Observable } from 'rxjs';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url = 'https://jsonplaceholder.typicode.com/users';
+  private url = environment.apiUrl + '/users';
 
   constructor(private http: HttpClient) {}
 
