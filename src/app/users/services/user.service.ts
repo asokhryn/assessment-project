@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IUser } from '../types/interfaces';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {environment} from "../../../environments/environment";
 
 @Injectable({
@@ -24,5 +24,9 @@ export class UserService {
     return this.getUsers().pipe(
       map((users: IUser[]) => users.filter(user => user.id !== id))
     );
+  }
+
+  createUser(user: IUser): Observable<IUser> {
+    return of(user)
   }
 }

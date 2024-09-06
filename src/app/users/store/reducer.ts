@@ -22,6 +22,11 @@ export const userReducer = createReducer(
     error
   })),
 
+  on(userActions.createUserSuccess, (state, { user }) => ({
+    ...state,
+    users: [user, ...state.users]
+  })),
+
   on(userActions.deleteUser, (state) => ({
     ...state,
   })),

@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {filter, Observable, take} from "rxjs";
 import {userActions} from "../../store/actions";
 import { Store } from '@ngrx/store';
 import {IUser, IUserState} from "../../types/interfaces";
@@ -77,6 +77,12 @@ export class UsersComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.store.dispatch(userActions.loadUsers());
+    //if there was no request yet (required here due to user creation simulation)
+    this.users$.pipe(
+      take(1),
+      filter(users => users.length === 0)
+    ).subscribe(() => {
+      this.store.dispatch(userActions.loadUsers());
+    });
   }
 }

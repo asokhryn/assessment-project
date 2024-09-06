@@ -57,6 +57,55 @@ export class UserEffects {
     )
   );
 
+
+  createUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.createUser),
+      mergeMap((action) =>
+        this.userService.createUser(action.user).pipe(
+          map((user: IUser) =>
+            userActions.createUserSuccess({ user })
+          ),
+          catchError((error) =>
+            of(userActions.createUserFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  createUserSuccess$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(userActions.createUserSuccess),
+        tap(() => {
+          this.snackBar.openFromComponent(SnackBarComponent, {
+            duration: 3000,
+            data: {
+              message: 'User successfully created!',
+            }
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  createUserFailure$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(userActions.createUserFailure),
+        tap(() => {
+          this.snackBar.openFromComponent(SnackBarComponent, {
+            duration: 3000,
+            data: {
+              message: 'Failed to create user. Please try again!',
+            }
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+
+
   deleteUserSuccess$ = createEffect(() =>
       this.actions$.pipe(
         ofType(userActions.deleteUserSuccess),
@@ -86,4 +135,5 @@ export class UserEffects {
       ),
     { dispatch: false }
   );
+
 }
