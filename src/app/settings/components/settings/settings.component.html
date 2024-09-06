@@ -1,1 +1,7 @@
 <p>settings works!</p>
+<app-select
+  [title]="'Language'"
+  [label]="'Chose'"
+  [options]="languageList"
+  (selectedOption)="onLanguageSelected($event)"
+></app-select>
