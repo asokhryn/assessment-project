@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import {SelectComponent} from "../../../shared/components/select/select.component";
+import {SettingContactFormComponent} from "../setting-contact-form/setting-contact-form.component";
 
 @Component({
   selector: 'app-settings',
   standalone: true,
   imports: [
-    SelectComponent
+    SelectComponent,
+    SettingContactFormComponent
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'
