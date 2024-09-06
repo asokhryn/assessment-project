@@ -11,6 +11,7 @@ import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatListItem, MatNavList} from "@angular/material/list";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {ISideBarLinkList} from "../../types/interfaces";
 
 @Component({
   selector: 'app-side-bar',
@@ -34,10 +35,10 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent {
-  itemList: any = [
-    {text: 'Home', icon: 'home', link: ''},
-    {text: 'Users', icon: 'person', link: 'users'},
-    {text: 'Settings', icon: 'settings', link: 'settings'},
+  itemList: ISideBarLinkList[] = [
+    {text: 'Home', icon: 'home', link: '', exact: true},
+    {text: 'Users', icon: 'person', link: 'users', exact: false},
+    {text: 'Settings', icon: 'settings', link: 'settings',  exact: false},
   ]
   @ViewChild('drawer') drawer: MatDrawer | undefined;
 

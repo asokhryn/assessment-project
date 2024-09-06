@@ -15,6 +15,7 @@ import {ILinkList} from "./types/interfaces";
 })
 export class UsersLayoutComponent {
   linksList: ILinkList[] = [
+    { link: '/users', labelLink: 'Users'},
     { link: 'create', labelLink: 'Create'},
     { link: 'import', labelLink: 'Import'},
   ]
