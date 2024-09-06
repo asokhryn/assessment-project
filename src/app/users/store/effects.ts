@@ -26,6 +26,21 @@ export class UserEffects {
     )
   );
 
+  loadUsersFailure$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(userActions.loadUsersFailure),
+        tap(() => {
+          this.snackBar.openFromComponent(SnackBarComponent, {
+            duration: 3000,
+            data: {
+              message: 'Failed to load users. Please refresh the page!',
+            }
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
   deleteUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.deleteUser),
