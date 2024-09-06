@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadUsers, loadUsersSuccess, loadUsersFailure } from './actions';
+import {userActions} from './actions';
 import {IUserState} from "../types/interfaces";
 
 export const initialState: IUserState = {
@@ -10,15 +10,27 @@ export const initialState: IUserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(loadUsers, (state) => ({ ...state, loading: true })),
-  on(loadUsersSuccess, (state, { users }) => ({
+  on(userActions.loadUsers, (state) => ({ ...state, loading: true })),
+  on(userActions.loadUsersSuccess, (state, { users }) => ({
     ...state,
     loading: false,
     users
   })),
-  on(loadUsersFailure, (state, { error }) => ({
+  on(userActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
+  })),
+
+  on(userActions.deleteUser, (state) => ({
+    ...state,
+  })),
+  on(userActions.deleteUserSuccess, (state, { users }) => ({
+    ...state,
+    users,
+  })),
+  on(userActions.deleteUserFailure, (state, { error }) => ({
+    ...state,
+    error,
   }))
 );

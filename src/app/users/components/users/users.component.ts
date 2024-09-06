@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {loadUsers} from "../../store/actions";
+import {userActions} from "../../store/actions";
 import { Store } from '@ngrx/store';
 import {IUser, IUserState} from "../../types/interfaces";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
@@ -54,13 +54,13 @@ export class UsersComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        //todo this.store.dispatch(deleteUser({ userId }));
+        this.store.dispatch(userActions.deleteUser({ userId: user.id }));
         console.log('delete', user.id)
       }
     });
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadUsers());
+    this.store.dispatch(userActions.loadUsers());
   }
 }

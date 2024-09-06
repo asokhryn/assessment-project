@@ -17,4 +17,11 @@ export class UserService {
       map((users: IUser[]) => users)
     );
   }
+
+  deleteUser(id: number): Observable<IUser[]> {
+    // Simulate user deletion
+    return this.getUsers().pipe(
+      map((users: IUser[]) => users.filter(user => user.id !== id))
+    );
+  }
 }

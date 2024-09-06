@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { loadUsers, loadUsersSuccess, loadUsersFailure } from './actions';
+import { userActions } from './actions';
 import { UserService } from '../services/user.service';
 import { IUser } from '../types/interfaces';
 
@@ -13,11 +13,27 @@ export class UserEffects {
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadUsers),
+      ofType(userActions.loadUsers),
       mergeMap(() =>
         this.userService.getUsers().pipe(
-          map((users: IUser[]) => loadUsersSuccess({ users })),
-          catchError((error) => of(loadUsersFailure({ error })))
+          map((users: IUser[]) => userActions.loadUsersSuccess({ users })),
+          catchError((error) => of(userActions.loadUsersFailure({ error })))
+        )
+      )
+    )
+  );
+
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.deleteUser),
+      mergeMap((action) =>
+        this.userService.deleteUser(action.userId).pipe(
+          map((users: IUser[]) =>
+            userActions.deleteUserSuccess({ users })
+          ),
+          catchError((error) =>
+            of(userActions.deleteUserFailure({ error }))
+          )
         )
       )
     )
