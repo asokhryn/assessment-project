@@ -2,7 +2,11 @@
   <mat-drawer #drawer opened="true" mode="side" position="start">
     <mat-nav-list >
       @for (item of itemList; track item) {
-        <mat-list-item [routerLink]="item.link">
+        <mat-list-item
+          [routerLink]="item.link"
+          routerLinkActive="active-item"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <div class="item"><mat-icon>{{item.icon}}</mat-icon> {{item.text}}</div>
         </mat-list-item>
       }

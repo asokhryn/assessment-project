@@ -10,7 +10,7 @@ import {NgClass} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatListItem, MatNavList} from "@angular/material/list";
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-side-bar',
@@ -27,7 +27,8 @@ import {RouterLink, RouterOutlet} from "@angular/router";
     MatListItem,
     MatNavList,
     RouterLink,
-    RouterOutlet
+    RouterOutlet,
+    RouterLinkActive
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
