@@ -12,7 +12,9 @@
               <div class="user-info">
                 <strong>{{ user.name }}</strong>
               </div>
-              <button style="z-index: 99" class="delete-button" mat-icon-button color="warn" (click)="openDeleteDialog('0ms', '0ms', user, $event)"><mat-icon>delete</mat-icon></button>
+              <button class="delete-button"
+                      mat-icon-button color="warn"
+                      (click)="openDeleteDialog('0ms', '0ms', user, $event)"><mat-icon>delete</mat-icon></button>
             </div>
 
           </mat-list-item>
