@@ -23,4 +23,15 @@ export class NavBarComponent {
   toggleSideBar() {
     this.toggleSideBarEvent.emit();
   }
+
+  userName(): string {
+    let username: any = localStorage.getItem('userData')
+    if(username) {
+      username = JSON.parse(username);
+      return username.firstName
+    }
+
+    return 'User Name'
+
+  }
 }

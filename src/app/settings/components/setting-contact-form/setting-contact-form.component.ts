@@ -35,6 +35,6 @@ export class SettingContactFormComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    localStorage.setItem('userData', JSON.stringify(this.form.value));
   }
 }
