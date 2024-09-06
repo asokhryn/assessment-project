@@ -10,6 +10,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmModalComponent} from "../../../shared/components/modals/confirm-modal/confirm-modal.component";
+import {InfoModalComponent} from "../../../shared/components/modals/info-modal/info-modal.component";
 
 
 @Component({
@@ -41,7 +42,9 @@ export class UsersComponent implements OnInit{
     this.loading$ = this.store.select((state) => state.users.loading);
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: IUser): void {
+  openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: IUser, $event: any): void {
+    $event.stopPropagation();
+
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       width: '250px',
       data: {
@@ -57,6 +60,15 @@ export class UsersComponent implements OnInit{
         this.store.dispatch(userActions.deleteUser({ userId: user.id }));
         console.log('delete', user.id)
       }
+    });
+  }
+
+  showInfoDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: IUser): void {
+    const dialogRef = this.dialog.open(InfoModalComponent, {
+      width: '450px',
+      data: { user, title:  `User Details` },
+      enterAnimationDuration,
+      exitAnimationDuration,
     });
   }
 

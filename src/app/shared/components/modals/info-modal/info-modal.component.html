@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content>
+  <mat-list role="list">
+    <mat-list-item role="listitem">
+      Name:  <strong>{{data.user.name}}</strong>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      Email:  <strong>{{data.user.email}}</strong>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      Address: <strong>{{data.user.address.city}} {{data.user.address.street}} {{data.user.address.suite}}</strong>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      Company name: <strong>{{data.user.company.name}}</strong>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      Phone: <strong>{{data.user.phone}}</strong>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      Website: <strong>{{data.user.website}}</strong>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onClose()" mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
