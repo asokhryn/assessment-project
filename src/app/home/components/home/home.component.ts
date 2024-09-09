@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import {MatCard} from "@angular/material/card";
 import {NgApexchartsModule} from "ng-apexcharts";
+import {HeatMapComponent} from "../heat-map/heat-map.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     MatCard,
-    NgApexchartsModule
+    NgApexchartsModule,
+    HeatMapComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -16,7 +18,8 @@ export class HomeComponent {
   public pieChartOptions: any = {
     chart: {
       type: 'pie',
-      foreColor: '#0c0404'
+      foreColor: '#0c0404',
+      height: 350,
     },
     labels: ['30+ years', '40+ years', '20+ years', '50+ years'],
     series: [44, 55, 13, 43],
