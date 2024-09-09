@@ -16,7 +16,7 @@ npm install
 2. Start the development server:
 
 ```
-ng serve
+npm run start
 ```
 
 Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -26,5 +26,5 @@ Navigate to `http://localhost:4200/`. The application will automatically reload 
 Run the following command to build the project:
 
 ```
-ng build
+npm run build
 ```
