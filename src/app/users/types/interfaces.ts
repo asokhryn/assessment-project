@@ -39,3 +39,12 @@ export interface ILinkList {
   labelLink: string
 }
 
+export interface ISubRoute {
+  url: string;
+  label: string;
+}
+
+export interface ISubRoutes {
+  [key: string]: ISubRoute[];
+}
+

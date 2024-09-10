@@ -1,10 +1,28 @@
 <mat-toolbar>
+  @if(!isMainRoute()) {
+    <div>
+      @for (subLink of subRoutes[currentRoute]; track subLink;  let index = $index;) {
+        <button [routerLink]="subLink.url" routerLinkActive="active-item"  [routerLinkActiveOptions]="{ exact: true }">
+          {{subLink.label}}
+        </button>
+        @if(index !== subRoutes[currentRoute].length - 1) {
+          <span> / </span>
+        }
+      }
+    </div>
+  } @else {
+    <button class="main-l">{{mainRoute.label}}</button>
+  }
+
   <span class="spacer"></span>
 
-  @for (linkItem of linkList; track linkItem){
-    <a
-      routerLinkActive="active-item"
-      [routerLinkActiveOptions]="{ exact: true }"
-      mat-button [routerLink]="linkItem.link">{{linkItem.labelLink}}</a>
+  @if(isMainRoute()) {
+    @for (linkItem of linkList; track linkItem){
+      <a
+        routerLinkActive="active-item"
+        [routerLinkActiveOptions]="{ exact: true }"
+        mat-button [routerLink]="linkItem.link">{{linkItem.labelLink}}</a>
+    }
   }
+
 </mat-toolbar>

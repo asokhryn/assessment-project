@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {SubNavComponent} from "../shared/components/sub-nav/sub-nav.component";
 import {RouterOutlet} from "@angular/router";
-import {ILinkList} from "./types/interfaces";
+import {ILinkList, ISubRoutes} from "./types/interfaces";
 
 @Component({
   selector: 'app-users-layout',
@@ -15,8 +15,20 @@ import {ILinkList} from "./types/interfaces";
 })
 export class UsersLayoutComponent {
   linksList: ILinkList[] = [
-    { link: '/users', labelLink: 'Users'},
     { link: 'create', labelLink: 'Create'},
     { link: 'import', labelLink: 'Import'},
   ]
+
+  mainRoute = {url: '/users', label: 'Users'};
+  subRoutes: ISubRoutes = {
+    '/users/create': [
+      { url: '/users', label: 'Users' },
+      { url: '/users/create', label: 'Create' }
+    ],
+    '/users/import': [
+      { url: '/users', label: 'Users' },
+      { url: '/users/import', label: 'Import' }
+    ]
+  };
+
 }
