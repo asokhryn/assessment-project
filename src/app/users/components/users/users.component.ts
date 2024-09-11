@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, Observable, take} from "rxjs";
+import {filter, first, Observable, switchMap} from "rxjs";
 import {IUser} from "../../types/interfaces";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {MatList, MatListItem} from "@angular/material/list";
@@ -52,12 +52,9 @@ export class UsersComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    //if there was no request yet (required here due to user creation simulation)
     this.users$.pipe(
-      take(1),
-      filter(users => users.length === 0)
-    ).subscribe(() => {
-      this.userService.getUsers().subscribe()
-    });
+      first(users => users.length === 0),
+      switchMap(() => this.userService.getUsers())
+    ).subscribe();
   }
 }

@@ -4,7 +4,7 @@ import {MatButton} from "@angular/material/button";
 import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {IUser} from "../../types/interfaces";
-import {filter, Observable, take} from "rxjs";
+import {first, Observable, switchMap} from "rxjs";
 import {UserService} from "../../services/user.service";
 import {selectAllEntities} from "@ngneat/elf-entities";
 import {userStore} from "../../store/user.store";
@@ -96,10 +96,8 @@ export class CreateComponent implements OnInit{
   ngOnInit(): void {
     //if there was no request yet
     this.users$.pipe(
-      take(1),
-      filter(users => users.length === 0)
-    ).subscribe(() => {
-      this.userService.getUsers().subscribe();
-    });
+      first(users => users.length === 0),
+      switchMap(() => this.userService.getUsers())
+    ).subscribe();
   }
 }
