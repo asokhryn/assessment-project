@@ -9,7 +9,9 @@ import {MatDivider} from "@angular/material/divider";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
-import {ConfirmModalComponent} from "../../../shared/components/modals/confirm-modal/confirm-modal.component";
+import {
+  ConfirmModalComponentButton
+} from "../../../shared/components/modals/confirm-modal/confirm-modal.component";
 import {InfoModalComponent} from "../../../shared/components/modals/info-modal/info-modal.component";
 import {SubNavComponent} from "../../../shared/components/sub-nav/sub-nav.component";
 import {RouterOutlet} from "@angular/router";
@@ -30,7 +32,8 @@ import {RouterOutlet} from "@angular/router";
     MatIconButton,
     MatButton,
     SubNavComponent,
-    RouterOutlet
+    RouterOutlet,
+    ConfirmModalComponentButton
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
@@ -46,25 +49,9 @@ export class UsersComponent implements OnInit{
     this.loading$ = this.store.select((state) => state.users.loading);
   }
 
-  openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: IUser, $event: any): void {
-    $event.stopPropagation();
-
-    const dialogRef = this.dialog.open(ConfirmModalComponent, {
-      width: '250px',
-      data: {
-        text: `Would you like to delete user ${user.name}?`,
-        cancelButton: 'Cancel',
-        confirmButton: 'Delete' },
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.store.dispatch(userActions.deleteUser({ userId: user.id }));
-        console.log('delete', user.id)
-      }
-    });
+  onDeleteConfirm($event: number | undefined) {
+    console.log($event)
+    $event && this.store.dispatch(userActions.deleteUser({ userId: $event }));
   }
 
   showInfoDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: IUser): void {

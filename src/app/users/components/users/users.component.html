@@ -12,9 +12,11 @@
               <div class="user-info">
                 <strong>{{ user.name }}</strong>
               </div>
-              <button class="delete-button"
-                      mat-icon-button color="warn"
-                      (click)="openDeleteDialog('0ms', '0ms', user, $event)"><mat-icon>delete</mat-icon></button>
+              <app-confirm-modal-button
+                [user]="user"
+                (confirm)="onDeleteConfirm($event)">
+                              <button class="delete-button" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+              </app-confirm-modal-button>
             </div>
 
           </mat-list-item>
