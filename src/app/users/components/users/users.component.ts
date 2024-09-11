@@ -1,20 +1,19 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {filter, Observable, take} from "rxjs";
 import {userActions} from "../../store/actions";
 import { Store } from '@ngrx/store';
-import {IUser, IUserState} from "../../types/interfaces";
+import {IUser} from "../../types/interfaces";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatDivider} from "@angular/material/divider";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
-import {MatDialog} from "@angular/material/dialog";
 import {
   ConfirmModalComponentButton
 } from "../../../shared/components/modals/confirm-modal/confirm-modal.component";
-import {InfoModalComponent} from "../../../shared/components/modals/info-modal/info-modal.component";
 import {SubNavComponent} from "../../../shared/components/sub-nav/sub-nav.component";
 import {RouterOutlet} from "@angular/router";
+import {UserListComponent} from "../../../shared/components/user-list/user-list.component";
 
 
 @Component({
@@ -33,13 +32,13 @@ import {RouterOutlet} from "@angular/router";
     MatButton,
     SubNavComponent,
     RouterOutlet,
-    ConfirmModalComponentButton
+    ConfirmModalComponentButton,
+    UserListComponent
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
 export class UsersComponent implements OnInit{
-  readonly dialog = inject(MatDialog);
 
   users$: Observable<IUser[]>;
   loading$: Observable<boolean>;
@@ -47,20 +46,6 @@ export class UsersComponent implements OnInit{
   constructor(private store: Store<any>) {
     this.users$ = this.store.select((state) => state.users.users);
     this.loading$ = this.store.select((state) => state.users.loading);
-  }
-
-  onDeleteConfirm($event: number | undefined) {
-    console.log($event)
-    $event && this.store.dispatch(userActions.deleteUser({ userId: $event }));
-  }
-
-  showInfoDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: IUser): void {
-    const dialogRef = this.dialog.open(InfoModalComponent, {
-      width: '450px',
-      data: { user, title:  `User Details` },
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
   }
 
   ngOnInit(): void {
