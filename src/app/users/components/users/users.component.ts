@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {filter, Observable, take} from "rxjs";
-import {userActions} from "../../store/actions";
-import { Store } from '@ngrx/store';
 import {IUser} from "../../types/interfaces";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {MatList, MatListItem} from "@angular/material/list";
@@ -14,6 +12,10 @@ import {
 import {SubNavComponent} from "../../../shared/components/sub-nav/sub-nav.component";
 import {RouterOutlet} from "@angular/router";
 import {UserListComponent} from "../../../shared/components/user-list/user-list.component";
+import {userStore} from "../../store/user.store";
+import {selectAllEntities} from "@ngneat/elf-entities";
+import {UserService} from "../../services/user.service";
+import {selectIsRequestPending} from "@ngneat/elf-requests";
 
 
 @Component({
@@ -43,9 +45,10 @@ export class UsersComponent implements OnInit{
   users$: Observable<IUser[]>;
   loading$: Observable<boolean>;
 
-  constructor(private store: Store<any>) {
-    this.users$ = this.store.select((state) => state.users.users);
-    this.loading$ = this.store.select((state) => state.users.loading);
+  constructor(private userService: UserService) {
+    this.loading$ = userStore.pipe(selectIsRequestPending('users'));
+
+    this.users$ = userStore.pipe(selectAllEntities());
   }
 
   ngOnInit(): void {
@@ -54,7 +57,7 @@ export class UsersComponent implements OnInit{
       take(1),
       filter(users => users.length === 0)
     ).subscribe(() => {
-      this.store.dispatch(userActions.loadUsers());
+      this.userService.getUsers().subscribe()
     });
   }
 }

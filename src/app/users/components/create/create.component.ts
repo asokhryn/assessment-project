@@ -4,9 +4,10 @@ import {MatButton} from "@angular/material/button";
 import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {IUser} from "../../types/interfaces";
-import {Store} from "@ngrx/store";
-import {userActions} from "../../store/actions";
 import {filter, Observable, take} from "rxjs";
+import {UserService} from "../../services/user.service";
+import {selectAllEntities} from "@ngneat/elf-entities";
+import {userStore} from "../../store/user.store";
 
 @Component({
   selector: 'app-create',
@@ -52,8 +53,8 @@ export class CreateComponent implements OnInit{
     }
   }
 
-  constructor(private fb: FormBuilder, private store: Store<any>) {
-    this.users$ = this.store.select((state) => state.users.users);
+  constructor(private fb: FormBuilder, private userService: UserService) {
+    this.users$ = userStore.pipe(selectAllEntities());
 
     this.form = this.fb.group({
       name: [''],
@@ -89,7 +90,7 @@ export class CreateComponent implements OnInit{
       website: formData.website || this.mockUser.website
     };
 
-    this.store.dispatch(userActions.createUser({user: updatedUser}));
+    this.userService.createUser(updatedUser).subscribe()
   }
 
   ngOnInit(): void {
@@ -98,7 +99,7 @@ export class CreateComponent implements OnInit{
       take(1),
       filter(users => users.length === 0)
     ).subscribe(() => {
-      this.store.dispatch(userActions.loadUsers());
+      this.userService.getUsers().subscribe();
     });
   }
 }
