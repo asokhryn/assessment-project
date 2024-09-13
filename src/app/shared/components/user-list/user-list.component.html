@@ -15,7 +15,7 @@
 
             <app-confirm-modal-button
               [user]="user"
-              (confirm)="onDeleteConfirm($event)">
+              (confirm)="onDeleteConfirm($event, user.id)">
               <button class="delete-button" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
             </app-confirm-modal-button>
           </div>

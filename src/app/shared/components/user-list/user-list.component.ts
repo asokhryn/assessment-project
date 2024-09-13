@@ -31,7 +31,7 @@ export class UserListComponent {
 
   constructor(private userService: UserService,) {}
 
-  onDeleteConfirm($event: number | undefined) {
-    $event && this.userService.deleteUser($event).subscribe();
+  onDeleteConfirm($event: boolean | undefined, id: number) {
+    $event && this.userService.deleteUser(id).subscribe();
   }
 }

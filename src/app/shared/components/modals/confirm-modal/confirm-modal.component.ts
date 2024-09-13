@@ -21,7 +21,7 @@ import {ITextContentConfirm} from "../../../types/interfaces";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmModalComponentButton {
-  @Output() confirm: EventEmitter<number | undefined> = new EventEmitter<number | undefined>();
+  @Output() confirm: EventEmitter<boolean | undefined> = new EventEmitter<boolean | undefined>();
   @Input() user: IUser | undefined;
   @Input() textContent: ITextContentConfirm = {
     text: `Would you like to delete user`,
@@ -44,7 +44,7 @@ export class ConfirmModalComponentButton {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.confirm.emit(this.user?.id);
+        this.confirm.emit(true);
       }
     });
   }
