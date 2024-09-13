@@ -8,6 +8,7 @@ import {AsyncPipe} from "@angular/common";
 import {IUser} from "../../../users/types/interfaces";
 import {ViewModalComponentButton} from "../modals/view-modal/view-modal.component";
 import {UserService} from "../../../users/services/user.service";
+import {UserListItemComponent} from "../user-list-item/user-list-item.component";
 
 @Component({
   selector: 'app-user-list',
@@ -21,7 +22,8 @@ import {UserService} from "../../../users/services/user.service";
     MatIcon,
     AsyncPipe,
     ViewModalComponentButton,
-    MatButton
+    MatButton,
+    UserListItemComponent
   ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'

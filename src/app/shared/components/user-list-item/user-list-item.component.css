@@ -1,0 +1,14 @@
+mat-list-item {
+  text-align: left;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-info {
+  flex: 1;
+}

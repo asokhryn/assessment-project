@@ -16,6 +16,7 @@ import {userStore} from "../../store/user.store";
 import {selectAllEntities} from "@ngneat/elf-entities";
 import {UserService} from "../../services/user.service";
 import {selectIsRequestPending} from "@ngneat/elf-requests";
+import {ViewModalComponentButton} from "../../../shared/components/modals/view-modal/view-modal.component";
 
 
 @Component({
@@ -35,7 +36,8 @@ import {selectIsRequestPending} from "@ngneat/elf-requests";
     SubNavComponent,
     RouterOutlet,
     ConfirmModalComponentButton,
-    UserListComponent
+    UserListComponent,
+    ViewModalComponentButton
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
