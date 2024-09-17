@@ -1,6 +1,6 @@
-import { createStore, withProps } from '@ngneat/elf';
+import {createStore, withProps} from '@ngneat/elf';
 import {IUser} from "../types/interfaces";
-import {withEntities} from "@ngneat/elf-entities";
+import {getAllEntities, withEntities} from "@ngneat/elf-entities";
 import {withRequestsStatus} from "@ngneat/elf-requests";
 
 export interface IUserState {
@@ -12,8 +12,10 @@ const initialState: IUserState = {
 };
 
 export const userStore = createStore(
-  { name: 'user' },
+  {name: 'user'},
   withProps<IUserState>(initialState),
   withEntities<IUser>(),
   withRequestsStatus()
 );
+
+

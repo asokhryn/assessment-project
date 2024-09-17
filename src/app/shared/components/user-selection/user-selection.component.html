@@ -1,5 +1,7 @@
+<h4>Another context of user-list usage</h4>
 <app-user-list1 [users]="users">
   <ng-template appActions let-user>
-    <input type="checkbox"/>
+    <input type="checkbox" (change)="handleSelect($event,user)"/>
   </ng-template>
 </app-user-list1>
+<button [disabled]="isDisabled | async" (click)="dialogRef.close(selection)">SELECT</button>

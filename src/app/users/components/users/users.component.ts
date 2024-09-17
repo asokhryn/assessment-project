@@ -1,19 +1,17 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {filter, first, firstValueFrom, Observable, switchMap} from "rxjs";
+import {first, firstValueFrom, Observable, switchMap} from "rxjs";
 import {IUser} from "../../types/interfaces";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatDivider} from "@angular/material/divider";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
-import {
-  ConfirmModalComponentButton
-} from "../../../shared/components/modals/confirm-modal/confirm-modal.component";
+import {ConfirmModalComponentButton} from "../../../shared/components/modals/confirm-modal/confirm-modal.component";
 import {SubNavComponent} from "../../../shared/components/sub-nav/sub-nav.component";
 import {RouterOutlet} from "@angular/router";
 import {UserListComponent} from "../../../shared/components/user-list/user-list.component";
 import {userStore} from "../../store/user.store";
-import {selectAllEntities} from "@ngneat/elf-entities";
+import {deleteEntities, getAllEntities, selectAllEntities} from "@ngneat/elf-entities";
 import {UserService} from "../../services/user.service";
 import {selectIsRequestPending} from "@ngneat/elf-requests";
 import {ViewModalComponentButton} from "../../../shared/components/modals/view-modal/view-modal.component";
@@ -23,7 +21,6 @@ import {ConfirmDirective} from "../../../shared/components/confirm.directive";
 import {Dialog} from "@angular/cdk/dialog";
 import {UserViewComponent} from "../../../shared/components/user-view/user-view.component";
 import {select} from "@ngneat/elf";
-import {SelectComponent} from "../../../shared/components/select/select.component";
 import {UserSelectionComponent} from "../../../shared/components/user-selection/user-selection.component";
 
 
@@ -88,7 +85,14 @@ export class UsersComponent implements OnInit {
   protected readonly select = select;
 
   selectUsers() {
-    const ref = this.dialog.open(UserSelectionComponent);
-    ref.componentRef?.setInput('users', []);
+    const ref = this.dialog.open<IUser[] | undefined>(UserSelectionComponent, {
+      data: userStore.query(getAllEntities())
+    });
+    ref.closed.pipe(first()).subscribe((users) => {
+      if (users) {
+        userStore.update(deleteEntities(users.map(user => user.id)));
+      }
+    });
+
   }
 }
