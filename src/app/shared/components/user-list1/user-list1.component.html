@@ -1,0 +1,10 @@
+<ul>
+  @for (user of users; track user) {
+    <li>
+      <div>{{ user.name }}</div>
+      <div>
+        <ng-container [ngTemplateOutlet]="actions()" [ngTemplateOutletContext]="{$implicit:user}"></ng-container>
+      </div>
+    </li>
+  }
+</ul>

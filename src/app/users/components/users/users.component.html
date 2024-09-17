@@ -1,9 +1,22 @@
-@if(loading$ | async) {
- <div style="padding: 50px">
-   Loading...
- </div>
-}
-@else {
+@if (loading$ | async) {
+  <div style="padding: 50px">
+    Loading...
+  </div>
+} @else {
   <app-user-list [users]="users$ | async"></app-user-list>
+
+  <mat-divider/>
+
+
+  <button (click)="selectUsers()">Select</button>
+
+
+  <h4>User list</h4>
+  <app-user-list1 [users]="users$  |async">
+    <ng-template appActions let-user>
+      <button (click)="viewUser(user)">View</button>
+      <button (appConfirm)="deleteUser($event, user)">Delete</button>
+    </ng-template>
+  </app-user-list1>
 }
 

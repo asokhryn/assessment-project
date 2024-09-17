@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  min-width: 600px;
+}
+
+p {
+  margin: 0;
+  padding: 10px 0;
+}
+
+p span {
+  font-weight: bold;
+}
