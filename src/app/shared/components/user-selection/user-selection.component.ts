@@ -6,6 +6,7 @@ import {AsyncPipe, JsonPipe} from "@angular/common";
 import {SelectionModel} from "@angular/cdk/collections";
 import {map, startWith} from "rxjs/operators";
 import {Dialog, DIALOG_DATA, DialogRef} from "@angular/cdk/dialog";
+import {ConfirmDirective} from "../confirm.directive";
 
 @Component({
   selector: 'app-user-selection',
@@ -14,22 +15,18 @@ import {Dialog, DIALOG_DATA, DialogRef} from "@angular/cdk/dialog";
     UserList1Component,
     ActionsDirective,
     JsonPipe,
-    AsyncPipe
+    AsyncPipe,
+    ConfirmDirective
   ],
   templateUrl: './user-selection.component.html',
   styleUrl: './user-selection.component.css'
 })
 export class UserSelectionComponent {
   protected readonly users = inject(DIALOG_DATA);
-  protected readonly select = output<IUser[]>();
   protected readonly dialogRef = inject(DialogRef);
 
 
   private readonly _selection = new SelectionModel<IUser>(true, []);
-
-  get selection() {
-    return this._selection.selected;
-  }
 
   isDisabled = this._selection.changed.pipe(
     startWith(true),
@@ -43,5 +40,12 @@ export class UserSelectionComponent {
     } else {
       this._selection.deselect(user);
     }
+  }
+
+  deleteSelection($event: boolean) {
+    if ($event) {
+      this.dialogRef.close(this._selection.selected);
+    }
+
   }
 }

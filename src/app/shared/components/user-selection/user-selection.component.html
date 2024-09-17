@@ -4,4 +4,4 @@
     <input type="checkbox" (change)="handleSelect($event,user)"/>
   </ng-template>
 </app-user-list1>
-<button [disabled]="isDisabled | async" (click)="dialogRef.close(selection)">SELECT</button>
+<button [disabled]="isDisabled | async" (appConfirm)="deleteSelection($event)">DELETE SELECTION</button>
